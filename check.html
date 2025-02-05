@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Webcam Demo</title>
+  </head>
+  <body>
+    <h2>Start Your Webcam</h2>
+    <video id="webcamVideo" autoplay playsinline width="320" height="240"></video>
+    <br />
+    <button id="webcamButton">Start Webcam</button>
+
+    <script>
+      const webcamButton = document.getElementById('webcamButton');
+      const webcamVideo = document.getElementById('webcamVideo');
+
+      webcamButton.onclick = async () => {
+        try {
+          console.log("Requesting webcam...");
+          const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+          webcamVideo.srcObject = stream;
+          console.log("Webcam started successfully!");
+        } catch (err) {
+          console.error("Error accessing webcam:", err);
+          alert("Could not access webcam. Please check permissions.");
+        }
+      };
+    </script>
+  </body>
+</html>
